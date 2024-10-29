@@ -6,11 +6,9 @@ import { thirtyNineArticles } from "../data/articles.ts";
 ---
 
 <Layout title="Welcome to Astro.">
-  <main
-    class="prose prose-xl dark:prose-invert fles flex-col justify-center items-center"
-  >
-    <h1 class="text-center">The 39 Articles of Religion</h1>
-    <ol class="list-none">
+  <main class="prose md:prose-xl dark:prose-invert px-8">
+    <h1 class="prose-2xl text-center">The 39 Articles of Religion</h1>
+    <ol class="list-none ml-0 pl-0">
       {
         thirtyNineArticles.map((article) => (
           <li>
