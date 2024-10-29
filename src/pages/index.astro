@@ -12,7 +12,7 @@ import { thirtyNineArticles } from "../data/articles.ts";
       {
         thirtyNineArticles.map((article) => (
           <li>
-            <article>
+            <article id={`article-${article.number}`}>
               <h2>
                 {article.number}. {article.title}
               </h2>
