@@ -7,14 +7,26 @@ import { thirtyNineArticles } from "../data/articles.ts";
 
 <Layout title="Welcome to Astro.">
   <main class="prose md:prose-xl dark:prose-invert px-8">
-    <h1 class="prose-2xl text-center">The 39 Articles of Religion</h1>
+    <h1 class="sm:text-center">The 39 Articles of Religion</h1>
     <ol class="list-none ml-0 pl-0">
       {
         thirtyNineArticles.map((article) => (
           <li>
             <article id={`article-${article.number}`}>
-              <h2>
-                {article.number}. {article.title}
+              <h2 class="group flex items-center">
+                <a
+                  href={`#article-${article.number}`}
+                  class="text-inherit no-underline flex-1"
+                >
+                  {article.number}. {article.title}
+                </a>
+                <button
+                  class="opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity text-gray-500 hover:text-gray-700 focus:text-gray-700"
+                  title="Copy link"
+                  data-article-id={`article-${article.number}`}
+                >
+                  #
+                </button>
               </h2>
               {article.content.map((section, index) => {
                 switch (section.type) {
@@ -44,3 +56,23 @@ import { thirtyNineArticles } from "../data/articles.ts";
     </ol>
   </main>
 </Layout>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll('button[title="Copy link"]').forEach((button) => {
+      button.addEventListener("click", () => {
+        const btn = button as any;
+        const articleId = btn.dataset.articleId;
+        const fullUrl = `${window.location.origin}${window.location.pathname}#${articleId}`;
+        navigator.clipboard
+          .writeText(fullUrl)
+          .then(() => {
+            btn.innerText = "✅";
+            setTimeout(() => {
+              btn.innerText = "#";
+            }, 1200);
+          })
+          .catch((err) => alert("Failed to copy link."));
+      });
+    });
+  });
+</script>
