@@ -1,8 +1,12 @@
 ---
+import { Image } from "astro:assets";
+
 import Layout from "../layouts/Layout.astro";
 import Card from "../components/Card.astro";
 
 import { thirtyNineArticles } from "../data/articles.ts";
+
+import CheckIcon from "../icons/check.svg";
 ---
 
 <Layout title="Welcome to Astro.">
@@ -66,9 +70,9 @@ import { thirtyNineArticles } from "../data/articles.ts";
         navigator.clipboard
           .writeText(fullUrl)
           .then(() => {
-            btn.innerText = "✅";
+            btn.innerText = "Copied";
             setTimeout(() => {
-              btn.innerText = "#";
+              btn.innerHTML = "#";
             }, 1200);
           })
           .catch((err) => alert("Failed to copy link."));
